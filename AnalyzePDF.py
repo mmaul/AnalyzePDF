@@ -281,11 +281,11 @@ def id(pdf):
             print "\t[-] Total (%s) or Inside (%s) <= 2.0" % (te_short,ie_short)
 
     # Process the /Page(s) results here just to make sure they were both read
-    if re.match('0', page_counter[0]) and re.match('0', page_counter[1]):
+    if len(page_counter) > 1 and re.match('0', page_counter[0]) and re.match('0', page_counter[1]):
         counter.append("page")
         print "[-] Page count suspicious:"  
         print "\t[*] Both /Page (%s) and /Pages (%s) = 0" % (page_counter[0],page_counter[1])
-    elif re.match('0', page_counter[0]) and not re.match('0', page_counter[1]):
+    elif len(page_counter) > 1 and re.match('0', page_counter[0]) and not re.match('0', page_counter[1]):
         counter.append("page")
         print "[-] Page count suspicious, no individual pages defined:"  
         print "\t[*] /Page = (%s) , /Pages = (%s)" % (page_counter[0],page_counter[1])

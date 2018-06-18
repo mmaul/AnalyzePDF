@@ -164,7 +164,7 @@ rule shellcode_blob_metadata : PDF
                 $magic at 0 and 1 of ($reg*)
 }
 
-rule multiple_filtering : PDF 
+/*rule multiple_filtering : PDF 
 {
         meta: 
                 author = "Glenn Edwards (@hiddenillusion)"
@@ -178,7 +178,7 @@ rule multiple_filtering : PDF
 
         condition: 
                 $magic at 0 and $attrib
-}
+}*/
 
 rule suspicious_js : PDF
 {
@@ -382,22 +382,22 @@ rule embed_wrong_version : PDF
                 $magic at 0 and $embed and not $ver
 }
 
-rule invalid_xref_numbers : PDF
-{
-        meta:
-			author = "Glenn Edwards (@hiddenillusion)"
-			version = "0.1"
-			description = "The first entry in a cross-reference table is always free and has a generation number of 65,535"
-			notes = "This can be also be in a stream..."
-			weight = 1
-		
-        strings:
-                $magic = { 25 50 44 46 }
-                $reg0 = /xref\r?\n?.*\r?\n?.*65535\sf/
-                $reg1 = /endstream.*?\r?\n?endobj.*?\r?\n?startxref/
-        condition:
-                $magic at 0 and not $reg0 and not $reg1
-}
+/* #rule invalid_xref_numbers : PDF
+#{
+#        meta:
+#			author = "Glenn Edwards (@hiddenillusion)"
+#			version = "0.1"
+#			description = "The first entry in a cross-reference table is always free and has a generation number of 65,535"
+#			notes = "This can be also be in a stream..."
+#			weight = 1
+#		
+#        strings:
+#                $magic = { 25 50 44 46 }
+#                $reg0 = /xref\r?\n?.*\r?\n?.*65535\sf/
+#                $reg1 = /endstream.*?\r?\n?endobj.*?\r?\n?startxref/
+#        condition:
+#                $magic at 0 and not $reg0 and not $reg1
+#} */
 
 rule js_splitting : PDF
 {
